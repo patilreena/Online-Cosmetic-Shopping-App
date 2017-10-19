@@ -10,6 +10,9 @@ class ProductsController < ApplicationController
   # GET /products/1
   # GET /products/1.json
   def show
+    @product = Product.includes(:user).find(params[:id])
+    @reviews = @product.reviews.includes(:user).all
+    @review  = @product.reviews.build(user_id: current_user.id) if current_user
   end
 
   # GET /products/new
@@ -25,11 +28,14 @@ class ProductsController < ApplicationController
   # POST /products.json
   def create
     @product = Product.new(product_params)
+    @product.save
 
     respond_to do |format|
       if @product.save
         format.html { redirect_to @product, notice: 'Product was successfully created.' }
         format.json { render :show, status: :created, location: @product }
+        # redirect_to products_path(@product)
+
       else
         format.html { render :new }
         format.json { render json: @product.errors, status: :unprocessable_entity }
