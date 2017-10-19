@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   root 'home#index'
 
   resources :profiles
+  resources :reviews
 
   devise_for :users
 
