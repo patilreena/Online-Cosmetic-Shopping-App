@@ -24,36 +24,36 @@
   <strong>Price:</strong>
   <%= @product.price %>
 </p>
-
+<br>
 <%= render 'reviews/form' %>
-
-<%#= link_to 'Rreview', review_path(@review) %>
+<br><br>
 <%= link_to 'Edit', edit_product_path(@product) %> |
 <%= link_to 'Back', products_path %>
-
+<br><br>
 <br><br>
 
   <% if @reviews.any?%>
 <p>
-  <strong>Reviews:</strong><br>
+  <div class="review">
 
-  <table class="table">
-    <thead class="thead-default">
-      <tr>
-        <th>No.</th>
-        <th>Content</th>
-        <th>Username</th>
-      </tr>
-    </thead>
+  <strong>Reviews:</strong><br><br>
+    </div>
+
     <tbody>
       <% @reviews.each do |review| %>
         <tr>
-          <th scope="row"><%= review.id %></th>
+          <td>
+            <div class="username">
+            <% username = review.user.profile.username if defined? review.user.profile %><%= username ? username : "unknown" %>:</td>
+                        </div>
+            <div class="content">
           <td><%= review.content %></td>
-          <td><%= review.user.profile.username if defined? review.user.profile %></td>
+          <%= link_to 'x',product_review_path(@product,review),method: :delete%>
+          <br><br>
+          </div>
         </tr>
       <% end %>
     </tbody>
-  </table>
+  <!-- </table> -->
 <% end %>
 </p>

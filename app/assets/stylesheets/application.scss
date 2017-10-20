@@ -10,8 +10,20 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- 
+
  */
 
 
 @import "bootstrap";
+
+.content{
+  color:rgb(247, 116, 175);
+}
+
+.username{
+  color:rgb(177, 176, 182);
+}
+
+.review{
+  font-weight: bold;
+}
